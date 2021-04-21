@@ -1,20 +1,51 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { NowPlayingResponce } from '../interfaces/NowPlaying-responce';
+import { Observable, of } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+
+import { Movie, NowPlayingResponce } from '../interfaces/NowPlaying-responce';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoviesService {
 
+  private baseURL:string = 'https://api.themoviedb.org/3';
+  private releasePage = 1;
+  public cargando:boolean = false;
+
   constructor(
     private http:HttpClient
   ) { }
 
+  get params(){
+    return {
+      api_key: '0690e69de635cb351395d97ee3d699cc',
+      language: 'en-US',
+      page: this.releasePage.toString()
+    };
+  }
+
   // return most recent releases in theaters
-  getNowPlaying():Observable<NowPlayingResponce> {
-    return this.http.get<NowPlayingResponce>(`https://api.themoviedb.org/3/movie/now_playing?api_key=0690e69de635cb351395d97ee3d699cc&language=en-US&page=1`);
+  getNowPlaying():Observable<Movie[]> {
+    
+    if(this.cargando){
+      // return an empty array of MOVIE
+      // that's why i use "of" rxjs operator
+      return of([]);
+    }
+
+    this.cargando = true;
+    return this.http.get<NowPlayingResponce>(`${this.baseURL}/movie/now_playing`, {
+        params: this.params
+      })
+      .pipe(
+        map((resp) =>  resp.results ),
+        tap(() => {
+          this.releasePage += 1;
+          this.cargando = false;
+        })
+      );
   }
 
 }

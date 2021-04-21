@@ -10,6 +10,7 @@ import { Movie } from '../../interfaces/nowPlaying-responce';
 export class HomeComponent implements OnInit {
 
   public movies:Movie[] = [];
+  public slideShow:Movie[] = [];
 
   constructor(
     private _movies:MoviesService
@@ -17,8 +18,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this._movies.getNowPlaying().subscribe(
-      (res) => {
-        this.movies = res.results;
+      (movies) => {
+        this.movies = movies;
+        this.slideShow = movies;
       },
       (err:any) => {
         console.log(err);
