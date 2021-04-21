@@ -14,7 +14,7 @@ export class MoviesService {
 
   // return most recent releases in theaters
   getNowPlaying():Observable<NowPlayingResponce> {
-    return this.http.get<NowPlayingResponce>(`https://api.themoviedb.org/3/movie/now_playing?api_key=0690e69de635cb351395d97ee3d699cc&language=es-ES&page=1`);
+    return this.http.get<NowPlayingResponce>(`https://api.themoviedb.org/3/movie/now_playing?api_key=0690e69de635cb351395d97ee3d699cc&language=en-US&page=1`);
   }
 
 }
