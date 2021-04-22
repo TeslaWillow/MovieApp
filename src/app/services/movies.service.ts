@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 // Interfaces
 import { Movie, NowPlayingResponce } from '../interfaces/NowPlaying-responce';
 import { SearchResponce } from '../interfaces/search-responce';
 import { MovieIDResponce } from '../interfaces/movieId-responce';
+import { MovieCastResponce, Cast } from '../interfaces/credits-responce';
 
 @Injectable({
   providedIn: 'root'
@@ -72,10 +73,24 @@ export class MoviesService {
 
   // return a movie by ID
   getMovieById(id:string):Observable<MovieIDResponce>{
-    // ?api_key=0690e69de635cb351395d97ee3d699cc&language=en-US
     return this.http.get<MovieIDResponce>(`${this.baseURL}/movie/${id}`, {
       params: this.params
-    });
+    }).pipe(
+      // This will happen when id is wrong
+      catchError((err) => of(null))
+    );
   }
+  
+  // return the cast of a movie by ID
+  getMovieCast(id:string):Observable<Cast[]>{
+    return this.http.get<MovieCastResponce>(`${this.baseURL}/movie/${id}/credits`,{
+      params: this.params
+    }).pipe(
+      map((res) => res.cast),
+      // This will happen when id is wrong
+      catchError((err) => of([]))
+    );
+  }
+
 }
 
