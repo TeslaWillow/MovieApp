@@ -1,0 +1,17 @@
+span {
+    color: #bd4c5f;
+    font-size: .8rem;
+    border: 1px solid #bd4c5f !important;
+}
+
+
+.btn {
+    color: #bd4c5f !important;
+    border: 1px solid #bd4c5f !important;
+    transition: .3s ease all;
+}
+
+.btn:hover {
+    background: #bd4c5f;
+    color: white !important;
+}

@@ -39,6 +39,10 @@ hr{
     display:block;
 }
 
+.pointer{
+    cursor: pointer;
+}
+
 textarea:focus, 
 textarea.form-control:focus, 
 input.form-control:focus, 

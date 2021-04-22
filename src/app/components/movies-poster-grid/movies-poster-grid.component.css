@@ -4,4 +4,9 @@ h4 {
 
 .poster{
     box-shadow: 0px 0px 10px rgba(0, 0, 0, .8);
+    transition: .3s ease all;
+}
+
+.poster:hover{
+    box-shadow: 0px 0px 8px #bd4c5f;
 }

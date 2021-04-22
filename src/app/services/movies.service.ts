@@ -6,6 +6,7 @@ import { map, tap } from 'rxjs/operators';
 // Interfaces
 import { Movie, NowPlayingResponce } from '../interfaces/NowPlaying-responce';
 import { SearchResponce } from '../interfaces/search-responce';
+import { MovieIDResponce } from '../interfaces/movieId-responce';
 
 @Injectable({
   providedIn: 'root'
@@ -69,4 +70,12 @@ export class MoviesService {
 
   }
 
+  // return a movie by ID
+  getMovieById(id:string):Observable<MovieIDResponce>{
+    // ?api_key=0690e69de635cb351395d97ee3d699cc&language=en-US
+    return this.http.get<MovieIDResponce>(`${this.baseURL}/movie/${id}`, {
+      params: this.params
+    });
+  }
 }
+
