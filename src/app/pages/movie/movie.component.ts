@@ -4,6 +4,7 @@ import { MoviesService } from '../../services/movies.service';
 import { MovieIDResponce } from '../../interfaces/movieId-responce';
 import { Location } from '@angular/common';
 import { Cast } from '../../interfaces/credits-responce';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-movie',
@@ -25,10 +26,24 @@ export class MovieComponent implements OnInit {
   ngOnInit(): void {
     // snapshot is used when in a page, there is no way to change de URL
     const { id } = this.activatedRoute.snapshot.params;
+
+    combineLatest([
+      this._movie.getMovieById(id),
+      this._movie.getMovieCast(id)
+    ]).subscribe( ([movie, cast] ) =>{
+      if(!movie) { 
+        this.router.navigateByUrl('/home');
+        return;
+      }
+      this.movie = movie;
+      this.cast = cast.filter( actor => actor.profile_path !== null );
+    });
+    /*
     this.getMovieData(id);
     this.getMovieCast(id);
+    */
   }
-
+  /*
   getMovieData(id:string){
     this._movie.getMovieById(id).subscribe(
       (movie) => {
@@ -49,7 +64,7 @@ export class MovieComponent implements OnInit {
       }
     );
   }
-
+  */
   goBack(){
     this.lotation.back();
   }
