@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
+// Interfaces
 import { Movie, NowPlayingResponce } from '../interfaces/NowPlaying-responce';
+import { SearchResponce } from '../interfaces/search-responce';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,9 @@ export class MoviesService {
     };
   }
 
+  resetPage(){
+    this.releasePage = 1;
+  }
   // return most recent releases in theaters
   getNowPlaying():Observable<Movie[]> {
     
@@ -46,6 +51,22 @@ export class MoviesService {
           this.cargando = false;
         })
       );
+  }
+
+  // return movies that matches with a term of search
+  searchMovies(term:string):Observable<Movie[]>{
+    const params = { ...this.params, 
+      page:'1', 
+      query: term, 
+      include_adult: 'false' 
+    };
+
+    return this.http.get<SearchResponce>(`${this.baseURL}/search/movie`, {
+      params
+    }).pipe(
+      map((res) => res.results)
+    );
+
   }
 
 }

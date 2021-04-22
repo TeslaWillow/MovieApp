@@ -12,17 +12,16 @@ import { Movie } from '../../interfaces/nowPlaying-responce';
 export class SlideshowComponent implements OnInit, AfterViewInit {
 
   @Input("movies") movies:Movie[] = [];
+
   public swiper:Swiper;
 
   constructor() { }
   
   ngOnInit(): void {
-    console.log(this.movies);
   }
 
   ngAfterViewInit(): void {
     this.swiper = new Swiper('.swiper-container', {
-      // Optional parameters
       loop: true,
     });
     

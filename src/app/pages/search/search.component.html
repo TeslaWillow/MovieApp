@@ -1,1 +1,4 @@
-<p>search works!</p>
+<h3 class="mb-3">Search of: "<span style="color: #bd4c5f ;">{{term}}</span>"</h3>
+<ng-container *ngIf="movies.length > 0">
+    <app-movies-poster-grid [movies]="movies"></app-movies-poster-grid>
+</ng-container>
