@@ -1,0 +1,24 @@
+<!-- Slider main container -->
+<div class="swiper-container">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      <div class="swiper-slide text-center" style="max-width: 100%;" *ngFor="let actor of cast">
+          <div class="card">
+            <img [src]="actor.profile_path | poster" class="card-img-top img-fluid" [alt]="actor.name + 'photo'">
+            <div class="card-body">
+              <h5 class="card-title" style="color: #bd4c5f !important;">{{actor.name}}</h5>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+  
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
+</div>

@@ -13,7 +13,7 @@ import { Cast } from '../../interfaces/credits-responce';
 export class MovieComponent implements OnInit {
 
   public movie:MovieIDResponce;
-  public cast:Cast[];
+  public cast:Cast[] = [];
 
   constructor(
     private activatedRoute:ActivatedRoute,
@@ -44,8 +44,8 @@ export class MovieComponent implements OnInit {
   getMovieCast(id:string){
     this._movie.getMovieCast(id).subscribe(
       (cast) => { 
-        this.cast = cast; 
-        console.log(this.cast);
+        //this.cast = cast;
+        this.cast = cast.filter( actor => actor.profile_path !== null );
       }
     );
   }

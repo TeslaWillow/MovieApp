@@ -7,11 +7,13 @@ import { PipesModule } from '../pipes/pipes.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SlideshowComponent } from './slideshow/slideshow.component';
 import { MoviesPosterGridComponent } from './movies-poster-grid/movies-poster-grid.component';
+import { CastSlideshowComponent } from './cast-slideshow/cast-slideshow.component';
 
 const COMPONENTS = [
   NavbarComponent,
   SlideshowComponent,
-  MoviesPosterGridComponent
+  MoviesPosterGridComponent,
+  CastSlideshowComponent
 ];
 
 @NgModule({
