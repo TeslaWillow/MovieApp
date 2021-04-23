@@ -8,6 +8,7 @@ import { Movie, NowPlayingResponce } from '../interfaces/NowPlaying-responce';
 import { SearchResponce } from '../interfaces/search-responce';
 import { MovieIDResponce } from '../interfaces/movieId-responce';
 import { MovieCastResponce, Cast } from '../interfaces/credits-responce';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class MoviesService {
 
   constructor(
     private http:HttpClient
-  ) { }
+  ) { 
+  }
 
   get params(){
     return {
